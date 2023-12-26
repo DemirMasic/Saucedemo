@@ -1,0 +1,23 @@
+{
+    "url": {
+        "home_page": "https://www.saucedemo.com/",
+        "cart_page": "https://www.saucedemo.com/cart.html",
+        "checkout_page": "https://www.saucedemo.com/checkout-step-one.html"
+    },
+    "login_data":{
+        "standard_username": "standard_user",
+        "login_password": "secret_sauce"
+    },
+    "credentials": {
+        "first_name": "Adnan",
+        "last_name": "Duharkic",
+        "postal_code": "71000"
+    },
+    "verification_message": {
+        "checkout_overview": "Checkout: Overview",
+        "checkout_complete": "Checkout: Complete!"
+        
+    }
+
+
+}
