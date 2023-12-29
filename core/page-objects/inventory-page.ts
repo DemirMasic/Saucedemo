@@ -16,11 +16,13 @@ export class InventoryPage extends BasePage {
     }
     
     async add_backpack_to_cart() {
-        this.findElementAndClick(this.item_backpack_add)
+        await this.waitAndClick(this.item_backpack_add,10000);
+        //this.findElementAndClick(this.item_backpack_add)
     }
     //after adding item to the cart, check if remove button is now available
     async check_text_remove() {
-        let text = await this.findElement(this.remove_backpack)
+        await this.waitForElement(this.remove_backpack, 10000);
+        let text = await this.findElement(this.remove_backpack);
         let r_text = await text.getText();
         expect(r_text).toMatch("Remove");
     }

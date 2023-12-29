@@ -7,6 +7,7 @@ const dataFilePath = path.resolve(__dirname, "../data/data.json");
 const testData = JSON.parse(readFileSync(dataFilePath, "utf8"));
 
 export class CheckoutPage extends BasePage {
+    private your_cart = By.xpath('//span[@class="title"]')
     private first_name = By.id('first-name');
     private last_name = By.id('last-name');
     private postal_code = By.id('postal-code');
@@ -19,10 +20,12 @@ export class CheckoutPage extends BasePage {
     }
     //check to see if we are on the cart page
     async check_current_url_checkout() {
+        await this.driver.wait(until.urlIs(testData.url.checkout_page), 500)
         let current_url = await this.driver.getCurrentUrl();
         expect(current_url).toBe(testData.url.checkout_page);
     }
     async enter_first_name() {
+        await this.waitForElement(this.first_name, 10000)
         await this.fillInputField(this.first_name, testData.credentials.first_name)
         
     }

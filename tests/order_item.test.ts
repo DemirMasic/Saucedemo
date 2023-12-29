@@ -29,10 +29,8 @@ test("complete order of an item", async () => {
     await loginPage.enter_login_username();
     await loginPage.enter_password();
     await loginPage.press_login();
-    await driver.sleep(1000);
     //Step 1:
     await inventoryPage.add_backpack_to_cart();
-    await driver.sleep(1000);
     await inventoryPage.check_text_remove();
     //Step 2:
     await inventoryPage.click_cart_button();
@@ -40,9 +38,7 @@ test("complete order of an item", async () => {
     await cartPage.check_item_is_in_cart();
     //Step 3:
     await cartPage.click_checkout_button();
-    await driver.sleep(1000);
     await checkoutPage.check_current_url_checkout();
-    await driver.sleep(1000);
     //Step 4, 5, 6:
     await checkoutPage.enter_first_name();
     await checkoutPage.enter_last_name();
