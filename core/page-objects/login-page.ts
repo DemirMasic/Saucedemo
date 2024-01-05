@@ -26,4 +26,8 @@ export class LoginPage extends BasePage {
     async press_login() {
         await this.findElementAndClick(this.login_button)
     }
+    async check_current_url_login() {
+        let current_url = await this.driver.getCurrentUrl();
+        expect(current_url).toBe(testData.url.home_page);
+    }
 }

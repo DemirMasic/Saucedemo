@@ -1,8 +1,9 @@
 {
     "url": {
-        "home_page": "https://www.saucedemo.com/",
+        "home_page": "https://www.saucedemo.com/", 
         "cart_page": "https://www.saucedemo.com/cart.html",
-        "checkout_page": "https://www.saucedemo.com/checkout-step-one.html"
+        "checkout_page": "https://www.saucedemo.com/checkout-step-one.html",
+        "inventory_page": "https://www.saucedemo.com/inventory.html"
     },
     "login_data":{
         "standard_username": "standard_user",

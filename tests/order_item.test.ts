@@ -25,6 +25,7 @@ beforeAll(async () => {
 },10000);
 
 test("complete order of an item", async () => {
+    //smoke test
     //Pre-condtions
     await loginPage.enter_login_username();
     await loginPage.enter_password();
