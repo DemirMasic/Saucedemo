@@ -12,7 +12,9 @@ export class InventoryPage extends BasePage {
     private cart_button = By.id('shopping_cart_container');
     private menu_button = By.id('react-burger-menu-btn');
     private logout_button = By.id('logout_sidebar_link');
-    private items_list = By.className('inventory_item')
+    private items_list = By.className('inventory_item');
+    private itemNames = By.css('.inventory_list .inventory_item .inventory_item_name');
+    private itemDescriptions = By.css('.inventory_list .inventory_item .inventory_item_desc');
 
     constructor(driver: WebDriver) {
         super(driver);
@@ -55,4 +57,29 @@ export class InventoryPage extends BasePage {
         // Check if there are exactly 6 items
         expect(items.length).toBe(6)
       }
+
+      public async verifyItemNamesAndDescriptions() {
+        // Wait for the inventory items to be loaded
+        await this.waitForElement(this.items_list, 10000);
+        
+        // Map for expected names and descriptions
+        const expectedItems = new Map<string, string>();
+        testData.items.forEach(item => expectedItems.set(item.name, item.description));
+    
+        // Find all inventory items
+        const items = await this.driver.findElements(this.items_list);
+        
+        for (const item of items) {
+            const actualName = await item.findElement(this.itemNames).getText();
+            const actualDescription = await item.findElement(this.itemDescriptions).getText();
+            // Check if the actual name is in the map of expected items
+            const expectedDescription = expectedItems.get(actualName);
+            expect(expectedItems.has(actualName)).toBe(true); // Ensures the actual name is expected
+            
+            // Check if the description matches the expected description
+            expect(actualDescription).toBe(expectedDescription); // Checks if the descriptions match
+        }
+    
+        console.log('All item names and descriptions are correct.');
+    }
 }
