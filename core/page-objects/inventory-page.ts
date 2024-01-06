@@ -12,7 +12,7 @@ export class InventoryPage extends BasePage {
     private cart_button = By.id('shopping_cart_container');
     private menu_button = By.id('react-burger-menu-btn');
     private logout_button = By.id('logout_sidebar_link');
-    private items_list = By.css('[class*="inventory_item"]')
+    private items_list = By.className('inventory_item')
 
     constructor(driver: WebDriver) {
         super(driver);
@@ -48,4 +48,13 @@ export class InventoryPage extends BasePage {
     async check_items_inventory(){
         //??
     }
+
+    public async checkItemsCount() {
+        // Wait for the inventory items to be loaded
+        await this.waitForElement(this.items_list, 10000);
+        // Find all inventory items
+        const items = await this.driver.findElements(this.items_list);
+        // Check if there are exactly 6 items
+        expect(items.length).toBe(6)
+      }
 }

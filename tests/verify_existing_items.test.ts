@@ -28,7 +28,7 @@ test("login to the page", async () => {
     await loginPage.press_login();
     //Steps 1:
     await inventoryPage.check_current_url_inventory();
-    await inventoryPage.check_items_inventory();
+    await inventoryPage.checkItemsCount();
     
   },20000);
 
