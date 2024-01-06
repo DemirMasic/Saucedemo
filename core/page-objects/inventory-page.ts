@@ -45,9 +45,7 @@ export class InventoryPage extends BasePage {
         await this.waitForElement(this.logout_button, 5000);
         await this.findElementAndClick(this.logout_button);
     }
-    async check_items_inventory(){
-        //??
-    }
+    
 
     public async checkItemsCount() {
         // Wait for the inventory items to be loaded
