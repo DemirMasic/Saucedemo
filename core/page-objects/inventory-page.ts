@@ -12,6 +12,9 @@ export class InventoryPage extends BasePage {
     private cart_button = By.id('shopping_cart_container');
     private menu_button = By.id('react-burger-menu-btn');
     private logout_button = By.id('logout_sidebar_link');
+    private all_items_button = By.id('inventory_sidebar_link');
+    private about_button = By.id('about_sidebar_link');
+    private reset_app_state_button = By.id('reset_sidebar_link');
     private items_list = By.className('inventory_item');
     private itemNames = By.css('.inventory_list .inventory_item .inventory_item_name');
     private itemDescriptions = By.css('.inventory_list .inventory_item .inventory_item_desc');
@@ -82,4 +85,24 @@ export class InventoryPage extends BasePage {
     
         console.log('All item names and descriptions are correct.');
     }
+
+    public async verifyMenuOptions() {
+        // Wait for the menu button to be loaded
+        await this.waitForElement(this.menu_button, 10000);
+        // Click on menu buttont
+        await this.findElementAndClick(this.menu_button);
+
+        await this.waitForElement(this.all_items_button, 10000);
+        await this.waitForElement(this.about_button, 10000);
+        await this.waitForElement(this.logout_button, 10000);
+        await this.waitForElement(this.reset_app_state_button, 10000);
+        // Check the text of each menu option
+        expect(await this.driver.findElement(this.all_items_button).getText()).toBe('All Items');
+        expect(await this.driver.findElement(this.about_button).getText()).toBe('About');
+        expect(await this.driver.findElement(this.logout_button).getText()).toBe('Logout');
+        expect(await this.driver.findElement(this.reset_app_state_button).getText()).toBe('Reset App State');
+
+        console.log('All menu options are present and have correct text.');
+
+      }
 }
