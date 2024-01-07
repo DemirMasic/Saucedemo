@@ -43,5 +43,13 @@ export default class BasePage {
     async fillInputField(inputField: By, text: string) {
         await (await this.findElement(inputField)).sendKeys(text);
     }
+    async scrollToBottomPage() {
+        await this.driver.executeScript('window.scrollTo(0, document.body.scrollHeight)');
+    }
+    async verifyDisplayedElement(selector: By) {
+        const element = await this.driver.findElement(selector);
+        const isDisplayed = await element.isDisplayed();
+        expect(isDisplayed).toBe(true);
+    }
     
 }

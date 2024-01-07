@@ -19,6 +19,9 @@
         "checkout_complete": "Checkout: Complete!"
         
     },
+    "footer" : {
+        "text" : "© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+    },
     "items": [
         {
             "name": "Sauce Labs Backpack",

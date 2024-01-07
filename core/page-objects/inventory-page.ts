@@ -18,6 +18,8 @@ export class InventoryPage extends BasePage {
     private items_list = By.className('inventory_item');
     private itemNames = By.css('.inventory_list .inventory_item .inventory_item_name');
     private itemDescriptions = By.css('.inventory_list .inventory_item .inventory_item_desc');
+    private footer = By.className('footer');
+    private footer_text = By.className('footer_copy');
 
     constructor(driver: WebDriver) {
         super(driver);
@@ -105,4 +107,21 @@ export class InventoryPage extends BasePage {
         console.log('All menu options are present and have correct text.');
 
       }
+
+      public async verifyFooterAndText() {
+        // Scroll to the bottom of the page
+        await this.scrollToBottomPage();
+
+        // Verify if footer is displayed
+        await this.verifyDisplayedElement(this.footer);
+
+        // Verify if footer text is displayed
+        await this.verifyDisplayedElement(this.footer_text);
+
+        const copyFooterText = await this.findElement(this.footer_text);
+        const actualFooterText =  await copyFooterText.getText();
+        expect(actualFooterText).toBe(testData.footer.text);
+
+        console.log('Footer is displayed with correct text.');
+    }
 }
