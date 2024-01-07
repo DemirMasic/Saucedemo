@@ -20,6 +20,9 @@ export class InventoryPage extends BasePage {
     private itemDescriptions = By.css('.inventory_list .inventory_item .inventory_item_desc');
     private footer = By.className('footer');
     private footer_text = By.className('footer_copy');
+    private twitter_link = By.css('.social_twitter a');
+    private facebook_link = By.css('.social_facebook a');
+    private linkedin_link = By.css('.social_linkedin a');
 
     constructor(driver: WebDriver) {
         super(driver);
@@ -123,5 +126,19 @@ export class InventoryPage extends BasePage {
         expect(actualFooterText).toBe(testData.footer.text);
 
         console.log('Footer is displayed with correct text.');
+    }
+
+    public async verifyMediaLinks() {
+        // Scroll to the bottom of the page
+        await this.scrollToBottomPage();
+
+        // Verify if footer is displayed
+        await this.verifyDisplayedElement(this.footer);
+
+        await this.verifySocialMediaLink(this.facebook_link, testData.footer.social_facebook);
+        await this.verifySocialMediaLink(this.twitter_link, testData.footer.social_twitter)
+        await this.verifySocialMediaLink(this.linkedin_link, testData.footer.social_linkedin);
+
+        console.log('All media links are displayed correctly.');
     }
 }

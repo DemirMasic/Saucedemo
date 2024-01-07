@@ -20,7 +20,10 @@
         
     },
     "footer" : {
-        "text" : "© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
+        "text" : "© 2024 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy",
+        "social_facebook": "https://www.facebook.com/saucelabs",
+        "social_twitter": "https://twitter.com/saucelabs",
+        "social_linkedin": "https://www.linkedin.com/company/sauce-labs/"
     },
     "items": [
         {

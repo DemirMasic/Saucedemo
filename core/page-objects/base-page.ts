@@ -51,5 +51,12 @@ export default class BasePage {
         const isDisplayed = await element.isDisplayed();
         expect(isDisplayed).toBe(true);
     }
+
+    async verifySocialMediaLink(socialLink: By, expectedUrl: string) {
+        await this.driver.wait(until.elementLocated(socialLink));
+        const socialMediaElement = await this.findElement(socialLink);
+        const href = await socialMediaElement.getAttribute('href');
+        expect(href).toBe(expectedUrl);
+    }
     
 }

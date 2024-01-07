@@ -28,8 +28,7 @@ test("login to the page", async () => {
     await loginPage.press_login();
     //Steps 1:
     await inventoryPage.check_current_url_inventory();
-    //await inventoryPage.verifyItemNamesAndDescriptions();
-    await inventoryPage.verifyFooterAndText();
+    await inventoryPage.verifyMediaLinks();
     
   },20000);
 
