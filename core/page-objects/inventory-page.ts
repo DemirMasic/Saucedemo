@@ -92,12 +92,14 @@ export class InventoryPage extends BasePage {
         console.log('All item names and descriptions are correct.');
     }
 
-    public async verifyMenuOptions() {
+    public async verifyMenuButton() {
         // Wait for the menu button to be loaded
         await this.waitForElement(this.menu_button, 10000);
         // Click on menu buttont
         await this.findElementAndClick(this.menu_button);
+    }
 
+    public async verifyMenuOptions() {
         //Wait for all items button to be visible
         const all_items_button_timer = await this.waitForElement(this.all_items_button, 10000);
         await this.waitForElementVisible(all_items_button_timer, 10000);

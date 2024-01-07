@@ -21,13 +21,14 @@ beforeAll(async () => {
 
 test("login to the page", async () => {
     //regression test 
-    //User should be able to log out of the page
+    //User should be able to log in of the page
     //Pre-condtions
     await loginPage.enter_login_username();
     await loginPage.enter_password();
     await loginPage.press_login();
-    //Steps 1:
+    //Step 1: User should be redirected to home page after logging in
     await inventoryPage.check_current_url_inventory();
+    //Step 2: User should be able to see exact 6 items
     await inventoryPage.checkItemsCount();
     
   },20000);

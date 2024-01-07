@@ -26,10 +26,10 @@ test("login to the page", async () => {
     await loginPage.enter_login_username();
     await loginPage.enter_password();
     await loginPage.press_login();
-    //Steps 1:
-    await inventoryPage.check_current_url_inventory();
+    //Step 1: Verify if Menu button is  displayed correctly
+    await inventoryPage.verifyMenuButton();
+    //Step 2: Verify if Menu options are  displayed correctly
     await inventoryPage.verifyMenuOptions();
-    
   },20000);
 
 afterAll(async () => {

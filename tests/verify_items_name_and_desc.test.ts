@@ -19,14 +19,11 @@ beforeAll(async () => {
     inventoryPage = new InventoryPage(driver);
 },10000);
 
-test("login to the page", async () => {
-    //regression test 
-    //User should be able to log out of the page
-    //Pre-condtions
+test("Verify items name and description", async () => {
     await loginPage.enter_login_username();
     await loginPage.enter_password();
     await loginPage.press_login();
-    //Steps 1:
+    //Step 1: Verify that each item has correct name and description
     await inventoryPage.check_current_url_inventory();
     await inventoryPage.verifyItemNamesAndDescriptions();
     
