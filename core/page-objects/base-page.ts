@@ -55,11 +55,25 @@ export default class BasePage {
         expect(isDisplayed).toBe(true);
     }
 
-    async verifySocialMediaLink(socialLink: By, expectedUrl: string) {
-        await this.driver.wait(until.elementLocated(socialLink));
-        const socialMediaElement = await this.findElement(socialLink);
-        const href = await socialMediaElement.getAttribute('href');
-        expect(href).toBe(expectedUrl);
+    async verifySocialMediaLinks(linkSelector: By, expectedUrl: string) {
+        // Click the social media link
+        const link = await this.driver.findElement(linkSelector);
+        await link.click();
+
+        // Wait for the new tab to open
+        await this.driver.wait(async () => (await this.driver.getAllWindowHandles()).length === 2, 10000);
+
+        // Switch to the new tab
+        const windows = await this.driver.getAllWindowHandles();
+        await this.driver.switchTo().window(windows[1]);
+
+        // Get the current URL and verify it
+        const currentUrl = await this.driver.getCurrentUrl();
+        expect(currentUrl).toContain(expectedUrl);
+
+        // Close the new tab and switch back to the original window
+        await this.driver.close();
+        await this.driver.switchTo().window(windows[0]);
     }
     
 }

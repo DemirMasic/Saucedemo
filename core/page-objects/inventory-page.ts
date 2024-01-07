@@ -23,6 +23,7 @@ export class InventoryPage extends BasePage {
     private twitter_link = By.css('.social_twitter a');
     private facebook_link = By.css('.social_facebook a');
     private linkedin_link = By.css('.social_linkedin a');
+    private cart_badge = By.className('shopping_cart_badge');
 
     constructor(driver: WebDriver) {
         super(driver);
@@ -111,7 +112,7 @@ export class InventoryPage extends BasePage {
 
         const reset_app_state_button_timer = await this.waitForElement(this.reset_app_state_button, 10000);
         await this.waitForElementVisible(reset_app_state_button_timer, 10000);
-        
+
         // Check the text of each menu option
         expect(await this.driver.findElement(this.all_items_button).getText()).toBe('All Items');
         expect(await this.driver.findElement(this.about_button).getText()).toBe('About');
@@ -122,13 +123,17 @@ export class InventoryPage extends BasePage {
 
       }
 
-      public async verifyFooterAndText() {
+    public async verifyFooter() {
         // Scroll to the bottom of the page
         await this.scrollToBottomPage();
 
         // Verify if footer is displayed
         await this.verifyDisplayedElement(this.footer);
 
+        console.log('Footer is displayed correctly.');
+    }
+
+    public async verifyFootersText() {
         // Verify if footer text is displayed
         await this.verifyDisplayedElement(this.footer_text);
 
@@ -136,20 +141,32 @@ export class InventoryPage extends BasePage {
         const actualFooterText =  await copyFooterText.getText();
         expect(actualFooterText).toBe(testData.footer.text);
 
-        console.log('Footer is displayed with correct text.');
+        console.log('Correct text is displayed on footer.');
     }
 
-    public async verifyMediaLinks() {
-        // Scroll to the bottom of the page
-        await this.scrollToBottomPage();
-
-        // Verify if footer is displayed
-        await this.verifyDisplayedElement(this.footer);
-
-        await this.verifySocialMediaLink(this.facebook_link, testData.footer.social_facebook);
-        await this.verifySocialMediaLink(this.twitter_link, testData.footer.social_twitter)
-        await this.verifySocialMediaLink(this.linkedin_link, testData.footer.social_linkedin);
-
-        console.log('All media links are displayed correctly.');
+    public async verifyFB() {
+        await this.verifySocialMediaLinks(this.facebook_link, testData.footer.social_facebook);
+        console.log('Facebook link is displayed correctly.');
     }
+
+    public async verifyTweeter() {
+        await this.verifySocialMediaLinks(this.twitter_link, testData.footer.social_twitter);
+        console.log('Tweeter link is displayed correctly.');
+    }
+
+    public async verifyLinkedin() {
+        await this.verifySocialMediaLinks(this.linkedin_link, testData.footer.social_linkedin);
+        console.log('Linkedin link is displayed correctly.');
+    }
+
+    public async verifyCartBadge() {
+        const badgeElement = await this.waitForElement(this.cart_badge, 1000);
+        await this.waitForElementVisible(badgeElement, 10000);
+
+        const badgeText = await badgeElement.getText();
+
+        // Verify that the badge text is '1'
+        expect(badgeText).toBe('1');
+        console.log('Cart badge is present with number 1.');
+      }
 }

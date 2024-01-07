@@ -19,16 +19,14 @@ beforeAll(async () => {
     inventoryPage = new InventoryPage(driver);
 },10000);
 
-test("login to the page", async () => {
-    //regression test 
-    //User should be able to log out of the page
-    //Pre-condtions
+test("Verify footer and text inside it", async () => {
     await loginPage.enter_login_username();
     await loginPage.enter_password();
     await loginPage.press_login();
-    //Steps 1:
-    await inventoryPage.check_current_url_inventory();
-    await inventoryPage.verifyFooterAndText();
+    //Step 1: Verify if footer is displayed properly
+    await inventoryPage.verifyFooter();
+    //Step 2: Verify if text is displayed properly on footer
+    await inventoryPage.verifyFootersText();
     
   },20000);
 
