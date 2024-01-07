@@ -97,10 +97,21 @@ export class InventoryPage extends BasePage {
         // Click on menu buttont
         await this.findElementAndClick(this.menu_button);
 
-        await this.waitForElement(this.all_items_button, 10000);
-        await this.waitForElement(this.about_button, 10000);
-        await this.waitForElement(this.logout_button, 10000);
-        await this.waitForElement(this.reset_app_state_button, 10000);
+        //Wait for all items button to be visible
+        const all_items_button_timer = await this.waitForElement(this.all_items_button, 10000);
+        await this.waitForElementVisible(all_items_button_timer, 10000);
+        
+        //Wait for about button to be visible
+        const about_button_timer = await this.waitForElement(this.about_button, 10000);
+        await this.waitForElementVisible(about_button_timer, 10000);
+
+        //Wait for logout button to be visible
+        const logout_button_timer = await this.waitForElement(this.logout_button, 10000);
+        await this.waitForElementVisible(logout_button_timer, 10000);
+
+        const reset_app_state_button_timer = await this.waitForElement(this.reset_app_state_button, 10000);
+        await this.waitForElementVisible(reset_app_state_button_timer, 10000);
+        
         // Check the text of each menu option
         expect(await this.driver.findElement(this.all_items_button).getText()).toBe('All Items');
         expect(await this.driver.findElement(this.about_button).getText()).toBe('About');

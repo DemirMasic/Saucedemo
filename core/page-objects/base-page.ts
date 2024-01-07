@@ -34,6 +34,9 @@ export default class BasePage {
     async waitForElement(elementLocator, timeout) {
         return this.driver.wait(until.elementLocated(elementLocator), timeout);
     }
+    async waitForElementVisible(elementLocator, timeout) {
+        return this.driver.wait(until.elementIsVisible(elementLocator), timeout);
+    }
     async hoverElement(element: WebElement) {
         const actions = this.driver.actions({ bridge: true });
         await actions
