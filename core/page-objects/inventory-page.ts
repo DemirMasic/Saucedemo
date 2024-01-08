@@ -24,6 +24,9 @@ export class InventoryPage extends BasePage {
     private facebook_link = By.css('.social_facebook a');
     private linkedin_link = By.css('.social_linkedin a');
     private cart_badge = By.className('shopping_cart_badge');
+    private sort_button = By.className('product_sort_container');
+    private az_sort = By.xpath('//option[@value="az"]');
+    private za_sort = By.xpath('//option[@value="za"]');
 
     constructor(driver: WebDriver) {
         super(driver);
@@ -170,5 +173,37 @@ export class InventoryPage extends BasePage {
         // Verify that the badge text is '1'
         expect(badgeText).toBe('1');
         console.log('Cart badge is present with number 1.');
-      }
+    }
+    async clickOnSortingMenu() {
+        await this.findElementAndClick(this.sort_button);
+    }
+    async sortByAZ() {
+        await this.waitAndClick(this.az_sort,2000);
+    }
+    async sortByZA() {
+        await this.waitAndClick(this.za_sort,2000);
+    }
+    async verifyAzSorting(){
+        //find all items on inventory page
+        await this.waitForElement(this.items_list, 10000);
+        const elements = await this.driver.findElements(this.items_list);
+        const items: string[] = [];
+        //extract the text of each item and put in a list
+        for (const element of elements) {
+            const text = await element.getText();
+            items.push(text);
+            
+        }
+        const isSorted = await this.isSortedAscending(items);
+        expect(isSorted).toBe(true)
+    }
+    async isSortedAscending(arr: string[]): Promise<boolean> {
+        for (let i = 0; i < arr.length - 1; i++) {
+            //here we will compare if the array is sorted
+            if (arr[i].localeCompare(arr[i + 1], 'en', { sensitivity: 'base' }) > 0) {
+              return false;
+            }
+          }
+          return true;
+    }
 }

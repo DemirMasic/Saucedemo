@@ -24,17 +24,19 @@ beforeAll(async () => {
     checkoutPage = new CheckoutPage(driver);
 },10000);
 
-test("User should be able to add an item to the cart", async () => {
+test("Verify A to Z sorting", async () => {
     //regression test
     //Pre-condtions
     await loginPage.enter_login_username();
     await loginPage.enter_password();
     await loginPage.press_login();
-    //Step 1 Add items to cart and check if text has changed to remove:
-    await inventoryPage.add_backpack_to_cart();
-    await inventoryPage.check_text_remove();
-    //Step 2 Check if the cart badge exists and if number is 1:
-    await inventoryPage.verifyCartBadge();
+    //Step 1 Click on sorting drop-down menu
+    await inventoryPage.clickOnSortingMenu();
+    //Step 2 Click on sort by a to z option
+    await inventoryPage.sortByAZ();
+    await inventoryPage.verifyAzSorting();
+    
+
 
   },20000);
 
