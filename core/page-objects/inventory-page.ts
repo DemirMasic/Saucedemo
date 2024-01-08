@@ -61,7 +61,7 @@ export class InventoryPage extends BasePage {
     }
     
 
-    public async checkItemsCount() {
+    async checkItemsCount() {
         // Wait for the inventory items to be loaded
         await this.waitForElement(this.items_list, 10000);
         // Find all inventory items
@@ -70,7 +70,7 @@ export class InventoryPage extends BasePage {
         expect(items.length).toBe(6)
       }
 
-      public async verifyItemNamesAndDescriptions() {
+      async verifyItemNamesAndDescriptions() {
         // Wait for the inventory items to be loaded
         await this.waitForElement(this.items_list, 10000);
         
@@ -95,14 +95,14 @@ export class InventoryPage extends BasePage {
         console.log('All item names and descriptions are correct.');
     }
 
-    public async verifyMenuButton() {
+    async verifyMenuButton() {
         // Wait for the menu button to be loaded
         await this.waitForElement(this.menu_button, 10000);
         // Click on menu buttont
         await this.findElementAndClick(this.menu_button);
     }
 
-    public async verifyMenuOptions() {
+    async verifyMenuOptions() {
         //Wait for all items button to be visible
         const all_items_button_timer = await this.waitForElement(this.all_items_button, 10000);
         await this.waitForElementVisible(all_items_button_timer, 10000);
@@ -128,7 +128,7 @@ export class InventoryPage extends BasePage {
 
       }
 
-    public async verifyFooter() {
+    async verifyFooter() {
         // Scroll to the bottom of the page
         await this.scrollToBottomPage();
 
@@ -138,7 +138,7 @@ export class InventoryPage extends BasePage {
         console.log('Footer is displayed correctly.');
     }
 
-    public async verifyFootersText() {
+    async verifyFootersText() {
         // Verify if footer text is displayed
         await this.verifyDisplayedElement(this.footer_text);
 
@@ -149,22 +149,22 @@ export class InventoryPage extends BasePage {
         console.log('Correct text is displayed on footer.');
     }
 
-    public async verifyFB() {
+    async verifyFB() {
         await this.verifySocialMediaLinks(this.facebook_link, testData.footer.social_facebook);
         console.log('Facebook link is displayed correctly.');
     }
 
-    public async verifyTweeter() {
+    async verifyTweeter() {
         await this.verifySocialMediaLinks(this.twitter_link, testData.footer.social_twitter);
         console.log('Tweeter link is displayed correctly.');
     }
 
-    public async verifyLinkedin() {
+    async verifyLinkedin() {
         await this.verifySocialMediaLinks(this.linkedin_link, testData.footer.social_linkedin);
         console.log('Linkedin link is displayed correctly.');
     }
 
-    public async verifyCartBadge() {
+    async verifyCartBadge() {
         const badgeElement = await this.waitForElement(this.cart_badge, 1000);
         await this.waitForElementVisible(badgeElement, 10000);
 
