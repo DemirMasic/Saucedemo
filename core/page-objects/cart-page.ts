@@ -2,6 +2,7 @@ import { By, WebDriver, until } from "selenium-webdriver";
 import BasePage from "./base-page";
 import { readFileSync } from "fs";
 import * as path from "path";
+import { InventoryPage } from "./inventory-page";
 
 const dataFilePath = path.resolve(__dirname, "../data/data.json");
 const testData = JSON.parse(readFileSync(dataFilePath, "utf8"));
@@ -9,6 +10,8 @@ const testData = JSON.parse(readFileSync(dataFilePath, "utf8"));
 export class CartPage extends BasePage {
     private item_quantity = By.className('cart_quantity');
     private checkout_button = By.id('checkout')
+    private item_backpack_add = By.id('add-to-cart-sauce-labs-backpack');
+    private remove_backpack = By.id('remove-sauce-labs-backpack');
     
 
     constructor(driver: WebDriver) {
@@ -28,6 +31,10 @@ export class CartPage extends BasePage {
     }
     async click_checkout_button(){
         await this.findElementAndClick(this.checkout_button);
+    }
+
+    async remove_backpack_from_cart() {
+        await this.removeItemFromCart(this.remove_backpack, this.item_backpack_add);
     }
 
 }

@@ -17,6 +17,10 @@ export default class BasePage {
     async findElement(selector: By) {
         return await this.driver.findElement(selector);
     }
+
+    async findElements(selector: By): Promise<WebElement[]> {
+        return this.driver.findElements(selector);
+    }
     async checkTitle(page: { getTitle: () => Promise<string>}, page_title: string){
         let title = await page.getTitle();
         expect(title).toMatch(page_title);
@@ -74,6 +78,18 @@ export default class BasePage {
         // Close the new tab and switch back to the original window
         await this.driver.close();
         await this.driver.switchTo().window(windows[0]);
+    }
+
+    async removeItemFromCart(removeButtonSelector: By, itemSelector: By) {
+        // Click the "Remove" button
+        const removeButtonElement = await this.findElement(removeButtonSelector);
+        await removeButtonElement.click();
+        await this.driver.sleep(500); // Waits for 0.5 s
+
+        // Check if the item is no longer present in the DOM
+        const itemElements = await this.findElements(itemSelector);
+        const isItemRemoved = itemElements.length === 0;
+        expect(isItemRemoved).toBe(true);
     }
     
 }
